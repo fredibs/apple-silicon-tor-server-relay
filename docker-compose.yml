@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  tor:
+    build: .
+    container_name: tor-obfs4
+    restart: unless-stopped
+
+    ports:
+      - "9050:9050"  # SOCKS
+      - "9001:9001"  # ORPort
+      - "9002:9002"  # obfs4
+
+    volumes:
+      - tor-data:/var/lib/tor
+
+    environment:
+      - TZ=America/Sao_Paulo
+
+volumes:
+  tor-data:
+  

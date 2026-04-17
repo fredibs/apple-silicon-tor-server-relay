@@ -1,0 +1,36 @@
+DataDirectory /var/lib/tor
+
+# Bridge
+BridgeRelay 0
+PublishServerDescriptor bridge
+
+# Porta interna do Tor
+ORPort 9001
+
+# obfs4 (ESSENCIAL)
+ServerTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+ServerTransportListenAddr obfs4 0.0.0.0:9002
+
+# Evita problemas em container
+ExtORPort 0
+
+# Log para Docker
+Log notice stdout
+
+########## OPCIONAL ##########
+
+# Nome do relay
+Nickname TorOdinFdRelayBR
+
+# Contato
+ContactInfo fredibs.cell@gmail.com
+
+# Proxy SOCKS (se quiser usar)
+SocksPort 127.0.0.1:9050
+
+# Segurança (sem saída)
+ExitPolicy reject *:*
+
+# Limite de banda
+RelayBandwidthRate 300 KB
+RelayBandwidthBurst 300 KB
